@@ -1,6 +1,5 @@
 import { addExpense, editExpense, removeExpense } from "../../actions/expenses";
 
-//addExpense
 test("should setup add expense action object with provided values", () => {
   const expenseData = {
     description: "Rent",
@@ -32,7 +31,6 @@ test("should setup add expense action object with default values", () => {
   });
 });
 
-//editExpense
 test("should setup edit expense action object", () => {
   const action = editExpense("123abc", { note: "New note value" });
   expect(action).toEqual({
@@ -44,7 +42,6 @@ test("should setup edit expense action object", () => {
   });
 });
 
-//removeExpense
 test("should setup remove expense action object", () => {
   const action = removeExpense({ id: "123abc" });
   expect(action).toEqual({
