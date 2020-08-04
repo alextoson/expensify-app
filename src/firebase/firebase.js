@@ -27,3 +27,9 @@ database.ref().set({
 // database.ref().set("This is my data.");
 
 database.ref("age").set(28);
+database.ref("location/city").set("Hornsby");
+
+database.ref("attributes").set({
+  height: 1.7,
+  weight: 78,
+});
