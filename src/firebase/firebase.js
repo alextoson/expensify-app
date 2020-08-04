@@ -12,9 +12,18 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-firebase
-  .database()
-  .ref()
-  .set({
-    name: "Alex Toson",
-  });
+const database = firebase.database();
+
+database.ref().set({
+  name: "Alex Toson",
+  age: 27,
+  isSingle: false,
+  location: {
+    city: "Sydney",
+    country: "Australia",
+  },
+});
+
+// database.ref().set("This is my data.");
+
+database.ref("age").set(28);
