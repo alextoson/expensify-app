@@ -14,26 +14,55 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-database.ref("expenses").push({
-  description: "Rent",
-  amount: "67000",
-  note: "",
-  createdAt: "515151515",
-});
+// child_removed
+database.ref("expenses").on(
+  "child_removed",
+  (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+  },
+  (e) => {
+    console.log("Error with data fetching", e);
+  }
+);
 
-database.ref("expenses").push({
-  description: "Food",
-  amount: "7000",
-  note: "",
-  createdAt: "51515351",
-});
+// child_changed
+database.ref("expenses").on(
+  "child_changed",
+  (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+  },
+  (e) => {
+    console.log("Error with data fetching", e);
+  }
+);
 
-database.ref("expenses").push({
-  description: "Petrol",
-  amount: "1020",
-  note: "",
-  createdAt: "241354645",
-});
+// child_added
+database.ref("expenses").on(
+  "child_added",
+  (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+  },
+  (e) => {
+    console.log("Error with data fetching", e);
+  }
+);
+
+// database.ref("expenses").on(
+//   "value",
+//   (snapshot) => {
+//     const expenses = [];
+//     snapshot.forEach((childSnapshot) => {
+//       expenses.push({
+//         id: childSnapshot.key,
+//         ...childSnapshot.val(),
+//       });
+//     });
+//     console.log(expenses);
+//   },
+//   (e) => {
+//     console.log("Error with data fetching", e);
+//   }
+// );
 
 // database.ref("notes").push({
 //   title: "Course Topics",
