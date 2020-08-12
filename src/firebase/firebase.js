@@ -19,10 +19,14 @@ database
   .set({
     name: "Alex Toson",
     age: 27,
-    isSingle: false,
+    stressLevel: 6,
     location: {
       city: "Sydney",
       country: "Australia",
+    },
+    job: {
+      title: "Software Engineer",
+      company: "New Republique",
     },
   })
   .then(() => {
@@ -32,7 +36,11 @@ database
     console.log("this failed", error);
   });
 
-database.ref("isSingle").set(null);
+database.ref().update({
+  stressLevel: 9,
+  "job/company": "Atlassian",
+  "location/city": "Melbourne",
+});
 
 // database
 //   .ref()
