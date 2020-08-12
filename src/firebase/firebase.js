@@ -14,33 +14,65 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-database
-  .ref()
-  .set({
-    name: "Alex Toson",
-    age: 27,
-    stressLevel: 6,
-    location: {
-      city: "Sydney",
-      country: "Australia",
-    },
-    job: {
-      title: "Software Engineer",
-      company: "New Republique",
-    },
-  })
-  .then(() => {
-    console.log("Data is saved!");
-  })
-  .catch((error) => {
-    console.log("this failed", error);
-  });
+const onValueChange = database.ref().on(
+  "value",
+  (snapshot) => {
+    const data = snapshot.val();
+    console.log(`${data.name} is a ${data.job.title} at ${data.job.company}`);
+  },
+  (e) => {
+    console.log("Error with data fetching", e);
+  }
+);
 
-database.ref().update({
-  stressLevel: 9,
-  "job/company": "Atlassian",
-  "location/city": "Melbourne",
-});
+setTimeout(() => {
+  database.ref().update({
+    name: "Ben",
+  });
+}, 3500);
+
+setTimeout(() => {
+  database.ref().off("value", onValueChange);
+}, 7000);
+
+// database
+//   .ref("location/city")
+//   .once("value")
+//   .then((snapshot) => {
+//     const val = snapshot.val();
+//     console.log(val);
+//   })
+//   .catch((error) => {
+//     console.log("Error fetching data", error);
+//   });
+
+// database
+//   .ref()
+//   .set({
+//     name: "Alex Toson",
+//     age: 27,
+//     stressLevel: 6,
+//     location: {
+//       city: "Sydney",
+//       country: "Australia",
+//     },
+//     job: {
+//       title: "Software Engineer",
+//       company: "New Republique",
+//     },
+//   })
+//   .then(() => {
+//     console.log("Data is saved!");
+//   })
+//   .catch((error) => {
+//     console.log("this failed", error);
+//   });
+
+// database.ref().update({
+//   stressLevel: 9,
+//   "job/company": "Atlassian",
+//   "location/city": "Melbourne",
+// });
 
 // database
 //   .ref()
