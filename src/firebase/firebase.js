@@ -32,20 +32,14 @@ database
     console.log("this failed", error);
   });
 
-// database.ref().set("This is my data.");
+database.ref("isSingle").set(null);
 
-// database.ref("age").set(28);
-// database.ref("location/city").set("Hornsby");
-
-database
-  .ref("attributes")
-  .set({
-    height: 1.7,
-    weight: 78,
-  })
-  .then(() => {
-    console.log("Data is saved again");
-  })
-  .catch((error) => {
-    console.log("this failed again", error);
-  });
+// database
+//   .ref()
+//   .remove()
+//   .then(() => {
+//     console.log("Remove succeeded.");
+//   })
+//   .catch((error) => {
+//     console.log("Remove failed: " + error.message);
+//   });
