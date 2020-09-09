@@ -6,6 +6,7 @@ import {
   removeExpense,
   startAddExpense,
   setExpenses,
+  startSetExpenses,
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import database from "../../firebase/firebase";
@@ -133,5 +134,17 @@ test("should set up expense action object with data", () => {
   expect(action).toEqual({
     type: "SET_EXPENSES",
     expenses,
+  });
+});
+
+test("should fecth teh expenses from firebase", (done) => {
+  const store = createMockStore({});
+  store.dispatch(startSetExpenses()).then(() => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: "SET_EXPENSES",
+      expenses,
+    });
+    done();
   });
 });
