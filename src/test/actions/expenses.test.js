@@ -115,7 +115,7 @@ test("should setup edit expense action object", () => {
   });
 });
 
-test("should edit the expense from firebase", () => {
+test("should edit the expense from firebase", (done) => {
   const store = createMockStore(defaultAuthState);
   const id = expenses[0].id;
   const updates = {
@@ -130,7 +130,7 @@ test("should edit the expense from firebase", () => {
         id,
         updates,
       });
-      return database.ref(`users/${uid}/expenses/${id}`).onec("value");
+      return database.ref(`users/${uid}/expenses/${id}`).once("value");
     })
     .then((snapshot) => {
       expect(snapshot.val().description).toBe(updates.description);
